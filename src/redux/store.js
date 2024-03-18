@@ -19,16 +19,16 @@ const teachersPersistConfig = {
   whitelist: ["favorite"],
 };
 
-const favoritesPersistConfig = {
-  key: "favorites",
-  storage,
-  whitelist: ["favorite"],
-};
+// const favoritesPersistConfig = {
+//   key: "favorites",
+//   storage,
+//   whitelist: ["favorite"],
+// };
 
 const store = configureStore({
   reducer: {
     teachers: persistReducer(teachersPersistConfig, teacherReducer),
-    favorites: persistReducer(favoritesPersistConfig, teacherReducer),
+    // favorites: persistReducer(favoritesPersistConfig, teacherReducer),
   },
 
   middleware: (getDefaultMiddleware) =>

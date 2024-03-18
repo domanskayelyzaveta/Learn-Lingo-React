@@ -12,6 +12,7 @@ import {
   Svg,
 } from "./Header.styled";
 import sprite from "../../images/sprite.svg";
+import { Link } from "react-router-dom";
 
 const Header = () => {
   return (
@@ -37,7 +38,10 @@ const Header = () => {
           </Svg>
           Log in
         </BtnLogIn>
-        <BtnRegister>Registration</BtnRegister>
+        {/* <BtnRegister>Registration</BtnRegister> */}
+        <Link to="/signup">
+          <BtnRegister>Registration</BtnRegister>
+        </Link>
       </BtnWrapper>
     </HeaderWrapper>
   );
