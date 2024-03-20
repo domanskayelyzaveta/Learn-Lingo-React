@@ -33,23 +33,22 @@ import TeachersPage from "./Pages/Teachers/TeachersPage";
 import NotFoundPage from "./Pages/HotFoundPage/NotFoundPage";
 import RegisterForm from "./Compnents/RegisterForm/RegisterForm";
 import LoginForm from "./Compnents/LoginForm/LoginForm";
+import { Layout } from "./Layout/Layout";
 
 const App = () => {
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(getTeachersThunk());
-  }, [dispatch]);
 
   return (
     <>
       <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/teachers" element={<TeachersPage />} />
-        <Route path="/signup" element={<RegisterForm />} />
-        <Route path="/login" element={<LoginForm />} />
-        <Route path="*" element={<Navigate to="/" />} />
-        <Route path="*" element={<NotFoundPage />} />
+        <Route path="/" element={<Layout />}>
+          <Route index element={<HomePage />} />
+          <Route path="home" element={<HomePage />} />
+          <Route path="tutors" element={<TeachersPage />} />
+          <Route path="signup" element={<RegisterForm />} />
+          <Route path="login" element={<LoginForm />} />
+          <Route path="*" element={<Navigate to="/" />} />
+          {/* <Route path="*" element={<NotFoundPage />} /> */}
+        </Route>
       </Routes>
     </>
   );

@@ -27,7 +27,7 @@ const Header = () => {
             <NavItems to="/">Home</NavItems>
           </li>
           <li>
-            <NavItems to="/teachers">Teachers</NavItems>
+            <NavItems to="/tutors">Teachers</NavItems>
           </li>
         </NavList>
       </NavWrapper>

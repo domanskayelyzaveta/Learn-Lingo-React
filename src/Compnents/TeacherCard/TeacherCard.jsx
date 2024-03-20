@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import { SelectTeachers } from "../../redux/selectors";
 import sprite from "../../images/sprite.svg";
 import {
@@ -15,31 +14,27 @@ import {
   StyledOnline,
   SvgHeart,
 } from "./TeacherCard.styled";
-import { getTeachersThunk } from "../../redux/thunks";
 import { useDispatch, useSelector } from "react-redux";
 
 const TeacherCard = () => {
   const teachersData = useSelector(SelectTeachers);
-  console.log(teachersData);
-
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(getTeachersThunk());
-  }, [dispatch]);
+  console.log("teachersData::", teachersData);
+  console.log("teachersData NAME::", teachersData[0]);
 
   return (
     <>
-      {teachersData.map((teacher, index) => (
+
+
+      {/* {teachersData?.map((teacher, index) => (
         <CardWrapper key={index}>
           <ImgDiv>
             <Image
-              src={teacher.avatar_url}
-              alt={`${teacher.name} ${teacher.surname}`}
+              src={teacher?.avatar_url}
+              alt={`${teacher?.name} ${teacher?.surname}`}
             />
+            <StyledOnline></StyledOnline>
           </ImgDiv>
 
-          <StyledOnline></StyledOnline>
           <div>
             <LessonAndInfoWrapper>
               <div>
@@ -87,7 +82,7 @@ const TeacherCard = () => {
             </StyleLevelList>
           </div>
         </CardWrapper>
-      ))}
+      ))} */}
     </>
   );
 };
