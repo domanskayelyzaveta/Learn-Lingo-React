@@ -14,7 +14,7 @@ import {
   StyledOnline,
   SvgHeart,
 } from "./TeacherCard.styled";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 
 const TeacherCard = () => {
   const teachersData = useSelector(SelectTeachers);

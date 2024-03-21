@@ -1,4 +1,5 @@
-import Form from "../Form/Form";
+import Form from "../../Form/Form";
+
 
 const LoginForm = () => {
   const handleLogin = (formData) => {

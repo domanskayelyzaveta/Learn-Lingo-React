@@ -12,9 +12,19 @@ import {
   Svg,
 } from "./Header.styled";
 import sprite from "../../images/sprite.svg";
-import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { setModalContent, setModalStatus } from "../../redux/slice";
+import { selectOpenModal } from "../../redux/selectors";
 
 const Header = () => {
+  const dispatch = useDispatch();
+  const modalStatus = useSelector(selectOpenModal);
+
+  const handleOpenUserModal = () => {
+    dispatch(setModalStatus(!modalStatus));
+    dispatch(setModalContent("Register"));
+  };
+
   return (
     <HeaderWrapper>
       <LogoWrapper>
@@ -32,17 +42,15 @@ const Header = () => {
         </NavList>
       </NavWrapper>
       <BtnWrapper>
-        <Link to="/login">
-          <BtnLogIn>
-            <Svg>
-              <use href={`${sprite}#log-in`}></use>
-            </Svg>
-            Log in
-          </BtnLogIn>
-        </Link>
-        <Link to="/signup">
-          <BtnRegister>Registration</BtnRegister>
-        </Link>
+        <BtnLogIn>
+          <Svg>
+            <use href={`${sprite}#log-in`}></use>
+          </Svg>
+          Log in
+        </BtnLogIn>
+        <BtnRegister type="button" onClick={handleOpenUserModal}>
+          Registration
+        </BtnRegister>
       </BtnWrapper>
     </HeaderWrapper>
   );

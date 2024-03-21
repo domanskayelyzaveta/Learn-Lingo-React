@@ -7,6 +7,8 @@ const initialState = {
   isLoading: false,
   error: null,
   hasMorePages: true,
+  modalContent: null,
+  openModal: false,
   filter: { price: 0, language: "", level: "" },
 };
 
@@ -21,6 +23,12 @@ const teacherSlice = createSlice({
       state.favorites = state.favorites.filter(
         (item) => item._id !== action.payload
       );
+    },
+    setModalStatus: (state, action) => {
+      state.openModal = action.payload;
+    },
+    setModalContent: (state, action) => {
+      state.modalContent = action.payload;
     },
   },
   extraReducers: (builder) => {
@@ -42,4 +50,9 @@ const teacherSlice = createSlice({
 });
 
 export const teacherReducer = teacherSlice.reducer;
-export const { setFavorites, removeFromFavorites } = teacherSlice.actions;
+export const {
+  setFavorites,
+  removeFromFavorites,
+  setModalStatus,
+  setModalContent,
+} = teacherSlice.actions;
