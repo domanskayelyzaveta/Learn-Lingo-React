@@ -32,13 +32,14 @@ const Header = () => {
         </NavList>
       </NavWrapper>
       <BtnWrapper>
-        <BtnLogIn>
-          <Svg>
-            <use href={`${sprite}#log-in`}></use>
-          </Svg>
-          Log in
-        </BtnLogIn>
-        {/* <BtnRegister>Registration</BtnRegister> */}
+        <Link to="/login">
+          <BtnLogIn>
+            <Svg>
+              <use href={`${sprite}#log-in`}></use>
+            </Svg>
+            Log in
+          </BtnLogIn>
+        </Link>
         <Link to="/signup">
           <BtnRegister>Registration</BtnRegister>
         </Link>

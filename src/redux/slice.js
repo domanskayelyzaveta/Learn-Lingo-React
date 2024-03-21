@@ -3,7 +3,7 @@ import { getTeachersThunk } from "./thunks";
 
 const initialState = {
   favorites: [],
-  teachersData: { data: [] },
+  teachersData: [],
   isLoading: false,
   error: null,
   hasMorePages: true,

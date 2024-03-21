@@ -56,6 +56,7 @@ export const NavItems = styled(NavLink)`
 
 export const BtnWrapper = styled.div`
   display: flex;
+  align-items: center;
   gap: 16px;
 `;
 
