@@ -13,6 +13,8 @@ export const StyledBackdrop = styled.div`
 `;
 
 export const StyledModalContent = styled.div`
+  position: relative;
+
   background: white;
   max-height: 90vh;
   overflow-y: auto;
@@ -31,4 +33,16 @@ export const StyledModalContent = styled.div`
   }
 
   border-radius: 10px;
+`;
+
+export const SvgCross = styled.svg`
+  position: absolute;
+  top: 20px;
+  right: 20px;
+
+  width: 32px;
+  height: 32px;
+  stroke: var(--text-color);
+
+  cursor: pointer;
 `;

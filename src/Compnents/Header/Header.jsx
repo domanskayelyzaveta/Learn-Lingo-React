@@ -20,9 +20,13 @@ const Header = () => {
   const dispatch = useDispatch();
   const modalStatus = useSelector(selectOpenModal);
 
-  const handleOpenUserModal = () => {
+  const handleOpenRegisterModal = () => {
     dispatch(setModalStatus(!modalStatus));
     dispatch(setModalContent("Register"));
+  };
+  const handleOpenLoginModal = () => {
+    dispatch(setModalStatus(!modalStatus));
+    dispatch(setModalContent("LogIn"));
   };
 
   return (
@@ -42,13 +46,13 @@ const Header = () => {
         </NavList>
       </NavWrapper>
       <BtnWrapper>
-        <BtnLogIn>
+        <BtnLogIn type="button" onClick={handleOpenLoginModal}>
           <Svg>
             <use href={`${sprite}#log-in`}></use>
           </Svg>
           Log in
         </BtnLogIn>
-        <BtnRegister type="button" onClick={handleOpenUserModal}>
+        <BtnRegister type="button" onClick={handleOpenRegisterModal}>
           Registration
         </BtnRegister>
       </BtnWrapper>

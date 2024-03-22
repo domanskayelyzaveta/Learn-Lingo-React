@@ -2,10 +2,13 @@ import { useEffect, useMemo, useCallback } from "react";
 import { createPortal } from "react-dom";
 import { StyledBackdrop, StyledModalContent } from "./Modal.styled";
 import { motion, AnimatePresence } from "framer-motion";
+import sprite from "../../images/sprite.svg";
+import { SvgCross } from "./Modal.styled";
+
 
 const modalRootElement = document.querySelector("#modalRoot");
 
-export const containerVariants = {
+const containerVariants = {
   hidden: {
     opacity: 0,
   },
@@ -24,6 +27,7 @@ export const containerVariants = {
 
 const Modal = ({ open, onClose, children }) => {
   const element = useMemo(() => document.createElement("div"), []);
+
 
   const handleKeyDown = useCallback(
     (event) => {
@@ -70,7 +74,12 @@ const Modal = ({ open, onClose, children }) => {
           exit="exit"
         >
           <StyledBackdrop onClick={handleBackdropClick}>
-            <StyledModalContent>{children}</StyledModalContent>
+            <StyledModalContent>
+              {children}
+              <SvgCross onClick={onClose}>
+                <use href={`${sprite}#icon-cross`}></use>
+              </SvgCross>
+            </StyledModalContent>
           </StyledBackdrop>
         </motion.div>
       )}
