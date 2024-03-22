@@ -8,6 +8,7 @@ import ModalContent from "./Compnents/ModalContent/ModalContent";
 import { useDispatch, useSelector } from "react-redux";
 import { selectOpenModal } from "./redux/selectors";
 import NotFoundPage from "./Pages/HotFoundPage/NotFoundPage";
+import { ToastContainer } from "react-toastify";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -34,6 +35,8 @@ const App = () => {
       <Modal open={modalStatus} onClose={handleCloseModal}>
         {<ModalContent />}
       </Modal>
+
+      <ToastContainer position="top-center" autoClose={3000} />
     </>
   );
 };

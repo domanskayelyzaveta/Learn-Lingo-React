@@ -1,5 +1,10 @@
-import { createSlice } from "@reduxjs/toolkit";
-import { getTeachersThunk } from "./thunks";
+import { createSlice, isAnyOf } from "@reduxjs/toolkit";
+import {
+  registerThunk,
+  getTeachersThunk,
+  logOutThunk,
+  signInThunk,
+} from "./thunks";
 
 const initialState = {
   favorites: [],
@@ -9,6 +14,8 @@ const initialState = {
   hasMorePages: true,
   modalContent: null,
   openModal: false,
+  token: [],
+  isSignedIn: false,
   filter: { price: 0, language: "", level: "" },
 };
 
@@ -33,6 +40,25 @@ const teacherSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
+      //=======signUp=========================//
+      .addCase(registerThunk.fulfilled, (state, action) => {
+        state.user = action.payload.user;
+        state.token = action.payload.token;
+        state.isSignedIn = true;
+      })
+      //=======signIn=========================//
+      .addCase(signInThunk.fulfilled, (state, action) => {
+        state.userData = action.payload.user;
+        state.token = action.payload.token;
+        state.isSignedIn = true;
+      })
+      //=======LogOut=========================//;
+      .addCase(logOutThunk.fulfilled, () => {
+        return initialState;
+      })
+      .addCase(logOutThunk.rejected, (state) => {
+        state.isSignedIn = false;
+      })
       .addCase(getTeachersThunk.pending, (state) => {
         state.isLoading = true;
         state.error = null;
@@ -45,7 +71,40 @@ const teacherSlice = createSlice({
       .addCase(getTeachersThunk.rejected, (state, action) => {
         state.isLoading = false;
         state.error = action.payload ? action.payload.toString() : null;
-      });
+      })
+      .addMatcher(
+        isAnyOf(
+          registerThunk.pending,
+          signInThunk.pending,
+          logOutThunk.pending
+        ),
+        (state) => {
+          state.error = null;
+          state.isLoading = true;
+        }
+      )
+      .addMatcher(
+        isAnyOf(
+          registerThunk.fulfilled,
+          signInThunk.fulfilled,
+          logOutThunk.fulfilled
+        ),
+        (state) => {
+          state.error = null;
+          state.isLoading = false;
+        }
+      )
+      .addMatcher(
+        isAnyOf(
+          registerThunk.rejected,
+          signInThunk.rejected,
+          logOutThunk.rejected
+        ),
+        (state, action) => {
+          state.isLoading = false;
+          state.error = action.payload;
+        }
+      );
   },
 });
 
