@@ -1,9 +1,22 @@
+import { useDispatch, useSelector } from "react-redux";
+import { signInThunk } from "../../../redux/thunks";
 import Form from "../../Form/Form";
-
+import { setModalStatus } from "../../../redux/slice";
+import { selectOpenModal } from "../../../redux/selectors";
+import { toast } from "react-toastify";
 
 const LoginForm = () => {
-  const handleLogin = (formData) => {
-    console.log("Login data:", formData);
+  const dispatch = useDispatch();
+  const modalStatus = useSelector(selectOpenModal);
+
+  const handleLogin = async ({ email, password }) => {
+    try {
+      await dispatch(signInThunk({ email, password })).unwrap();
+      dispatch(setModalStatus(!modalStatus));
+      // toast.success("You are logged in");
+    } catch (error) {
+      toast.error(error.message);
+    }
   };
 
   return (

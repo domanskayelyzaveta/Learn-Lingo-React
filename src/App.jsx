@@ -6,14 +6,17 @@ import Modal from "./Compnents/Modals/Modal";
 import { setModalContent, setModalStatus } from "./redux/slice";
 import ModalContent from "./Compnents/ModalContent/ModalContent";
 import { useDispatch, useSelector } from "react-redux";
-import { selectOpenModal } from "./redux/selectors";
+
 import NotFoundPage from "./Pages/HotFoundPage/NotFoundPage";
 import { ToastContainer } from "react-toastify";
+import Favorites from "./Pages/Favorites/Favorites";
+import { selectIsSignedIn, selectOpenModal } from "./redux/selectors";
 
 const App = () => {
   const dispatch = useDispatch();
 
   const modalStatus = useSelector(selectOpenModal);
+  const isSignedIn = useSelector(selectIsSignedIn);
 
   const handleCloseModal = () => {
     dispatch(setModalStatus(false));
@@ -27,6 +30,11 @@ const App = () => {
           <Route index element={<HomePage />} />
           <Route path="home" element={<HomePage />} />
           <Route path="tutors" element={<TeachersPage />} />
+          {/* <Route path="favorites" element={<Favorites />} /> */}
+          <Route
+            path="favorites"
+            element={isSignedIn ? <Favorites /> : <Navigate to="/login" />}
+          />
           <Route path="*" element={<Navigate to="/" />} />
           <Route path="*" element={<NotFoundPage />} />
         </Route>

@@ -16,7 +16,7 @@ import { teacherReducer } from "./slice";
 const teachersPersistConfig = {
   key: "teachers",
   storage,
-  whitelist: ["favorite"],
+  whitelist: ["isSignedIn", "token", "favorites"],
 };
 
 // const favoritesPersistConfig = {
@@ -41,4 +41,3 @@ const store = configureStore({
 
 export const persistor = persistStore(store);
 export default store;
-

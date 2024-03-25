@@ -14,11 +14,12 @@ import {
 import sprite from "../../images/sprite.svg";
 import { useDispatch, useSelector } from "react-redux";
 import { setModalContent, setModalStatus } from "../../redux/slice";
-import { selectOpenModal } from "../../redux/selectors";
+import { selectIsSignedIn, selectOpenModal } from "../../redux/selectors";
 
 const Header = () => {
   const dispatch = useDispatch();
   const modalStatus = useSelector(selectOpenModal);
+  const isSignedIn = useSelector(selectIsSignedIn);
 
   const handleOpenRegisterModal = () => {
     dispatch(setModalStatus(!modalStatus));
@@ -43,6 +44,11 @@ const Header = () => {
           <li>
             <NavItems to="/tutors">Teachers</NavItems>
           </li>
+          {isSignedIn && (
+            <li>
+              <NavItems to="/favorites">Favorites</NavItems>
+            </li>
+          )}
         </NavList>
       </NavWrapper>
       <BtnWrapper>
