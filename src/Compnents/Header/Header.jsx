@@ -15,6 +15,8 @@ import sprite from "../../images/sprite.svg";
 import { useDispatch, useSelector } from "react-redux";
 import { setModalContent, setModalStatus } from "../../redux/slice";
 import { selectIsSignedIn, selectOpenModal } from "../../redux/selectors";
+import { logOutThunk } from "../../redux/thunks";
+import { clearToken } from "../../service/api";
 
 const Header = () => {
   const dispatch = useDispatch();
@@ -28,6 +30,10 @@ const Header = () => {
   const handleOpenLoginModal = () => {
     dispatch(setModalStatus(!modalStatus));
     dispatch(setModalContent("LogIn"));
+  };
+  const handleLogOut = () => {
+    dispatch(logOutThunk());
+    clearToken();
   };
 
   return (
@@ -52,15 +58,26 @@ const Header = () => {
         </NavList>
       </NavWrapper>
       <BtnWrapper>
-        <BtnLogIn type="button" onClick={handleOpenLoginModal}>
-          <Svg>
-            <use href={`${sprite}#log-in`}></use>
-          </Svg>
-          Log in
-        </BtnLogIn>
-        <BtnRegister type="button" onClick={handleOpenRegisterModal}>
-          Registration
-        </BtnRegister>
+        {isSignedIn ? (
+          <BtnLogIn type="button" onClick={handleLogOut}>
+            <Svg>
+              <use href={`${sprite}#log-in`}></use>
+            </Svg>
+            Log out
+          </BtnLogIn>
+        ) : (
+          <BtnLogIn type="button" onClick={handleOpenLoginModal}>
+            <Svg>
+              <use href={`${sprite}#log-in`}></use>
+            </Svg>
+            Log in
+          </BtnLogIn>
+        )}
+        {!isSignedIn && (
+          <BtnRegister type="button" onClick={handleOpenRegisterModal}>
+            Registration
+          </BtnRegister>
+        )}
       </BtnWrapper>
     </HeaderWrapper>
   );

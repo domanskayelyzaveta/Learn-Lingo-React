@@ -9,7 +9,7 @@ export const setToken = (token) => {
   $instance.defaults.headers.common.Authorization = `Bearer ${token}`;
 };
 
-const clearToken = () => {
+export const clearToken = () => {
   $instance.defaults.headers.common.Authorization = "";
 };
 
@@ -41,3 +41,4 @@ export const logout = async () => {
   clearToken();
   return data;
 };
+
