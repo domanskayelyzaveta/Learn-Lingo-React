@@ -1,8 +1,9 @@
 // https://learn-lingo-backend-2.onrender.com/api/teachers //auth/signup  //auth/signin
 
+
 import axios from "axios";
 
-export const BASE_URL = "https://learn-lingo-backend-2.onrender.com/api";
+export const BASE_URL = "https://learn-lingo-backend.onrender.com/api";
 const $instance = axios.create({ baseURL: BASE_URL });
 
 export const setToken = (token) => {
@@ -36,9 +37,10 @@ export const signin = async (userData) => {
   return data;
 };
 
-export const logout = async () => {
+export const fetchLogout = async () => {
   const { data } = await $instance.post("/auth/logout");
   clearToken();
   return data;
 };
+
 

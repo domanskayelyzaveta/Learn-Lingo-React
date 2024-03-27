@@ -1,5 +1,5 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { fetchTeachers, logout, signin, signup } from "../service/api";
+import { fetchLogout, fetchTeachers, signin, signup } from "../service/api";
 import { toast } from "react-toastify";
 
 export const getTeachersThunk = createAsyncThunk(
@@ -42,9 +42,9 @@ export const signInThunk = createAsyncThunk(
 
 export const logOutThunk = createAsyncThunk(
   "users/logout",
-  async (_, thunkAPI) => {
+  async (token, thunkAPI) => {
     try {
-      await logout();
+      await fetchLogout(token);
       return;
     } catch (error) {
       toast.error(error.response.data.message);
