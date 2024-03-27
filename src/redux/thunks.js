@@ -45,6 +45,7 @@ export const logOutThunk = createAsyncThunk(
   async (token, thunkAPI) => {
     try {
       await fetchLogout(token);
+      toast("Logout successfully");
       return;
     } catch (error) {
       toast.error(error.response.data.message);
